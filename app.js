@@ -24,7 +24,6 @@ httpdigest.createServer(username, password, function(req, res) {
 
 //run exec to update server, piping stdout to the http response
 var runUpdate = function(cb) {
-	var sys = require('sys')
 	var exec = require('child_process').exec;
 	var child;
 
