@@ -1,7 +1,7 @@
-var psGrep = require('ps-grep');
+var psGrep = require('./ps-grep');
 
 console.log(psGrep)
 
-psGrep.findPid('ttys00',function(error,data){
+psGrep.findPid('srcds',function(error,data){
 	console.log(error,data);
 })

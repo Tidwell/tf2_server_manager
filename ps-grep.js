@@ -8,7 +8,8 @@ var findPid = function(str,cb) {
 	  var data = [];
 	  var rows = stdout.split('\n');
 	  rows.forEach(function(row) {
-	  	var pid = Number(row.split('?')[0].replace(/ /g,''));
+	  	console.log(row.split(' '));
+	  	var pid = Number(row.split(' ')[0].replace(/ /g,''));
 	  	if (pid) {
 		  	data.push(pid);
 		}
