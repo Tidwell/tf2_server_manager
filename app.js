@@ -40,7 +40,9 @@ var runUpdate = function(cb) {
 }
 
 var restartServer = function(res) {
+    console.log('restarting server...')
     psGrep.findPid('srcds',function(error,pids){
+    	console.log('found',pids);
     	if (error) {
     		handleError(res, error);
     		return;
