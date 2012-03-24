@@ -4,9 +4,13 @@ console.log('cmd',cmd)
 exec(cmd,function (error, stdout, stderr) {	  
 	console.log('restarting server');
 	if (error) {
-		handleError(res, error);
+		handleError(error,stdout,stderr);
 		return;
 	}
 	console.log('done');
 	console.log('Server Restarted');
 });
+
+var handleError = function(error,stdout,stderr) {
+	console.log(error,stdout,stderr);
+}
