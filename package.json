@@ -1,0 +1,8 @@
+{
+    "name": "tf2_http_server_manager"
+  , "version": "0.0.1"
+  , "private": true
+  , "dependencies": {
+    "http-digest": "0.1.0"
+  }
+}
