@@ -12,7 +12,8 @@ httpdigest.createServer(username, password, function(req, res) {
   	res.writeHead(200, {'Content-Type': 'text/plain'});	
   	res.write('Updating Server. \n')
     if (error) {
-    	res.end(error);
+    	res.end('error');
+    	console.log(error);
     	return;
     }
     res.end(stdout);
