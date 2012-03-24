@@ -5,7 +5,6 @@ var findPid = function(str,cb) {
 	var child;
 	// executes `pwd`
 	child = exec("ps -A | grep "+str, function (error, stdout, stderr) {
-		console.log('ps '+stdout)
 	  var data = [];
 	  var rows = stdout.split('\n');
 	  rows.forEach(function(row) {
