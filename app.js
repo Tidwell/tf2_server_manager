@@ -25,8 +25,8 @@ httpdigest.createServer(username, password, function(req, res) {
 
 
 var handleError = function(res, error) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});	
   console.log(error);
+  res.writeHead(200, {'Content-Type': 'text/plain'});	
   res.end('error');
 }
 
@@ -43,14 +43,14 @@ var runUpdate = function(cb) {
 var restartServer = function(res) {
     psGrep.findPid('srcds',function(error,pids){
     	if (error) {
-    		handleError(error);
+    		handleError(res, error);
     		return;
     	}
     	var pidCount = 0;
 		pids.forEach(function(pid) {
 			exec('kill '+pid,function(error,stdout,stderr){
 				if (error) {
-					handleError(error);
+					handleError(res, error);
 					return;
 				}
 				pidCount++;
@@ -62,7 +62,7 @@ var restartServer = function(res) {
 				res.write('Server Processes Killed');
 				exec('cd '+serverPath+'gameserver/orangebox/; ./srcds_run -game tf -autoupdate -maxplayers 24 +map cp_badlands',function (error, stdout, stderr) {	  
 	  				if (error) {
-	  					handleError(error);
+	  					handleError(res, error);
 	  					return;
 	  				}
 	  				res.end('Server Restarted');
