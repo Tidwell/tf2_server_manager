@@ -11,7 +11,7 @@ var exec = require('child_process').exec;
 /* A simple secured web server, unauthenticated requests are not allowed */
 httpdigest.createServer(username, password, function(req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});		
-  res.write('Updating Server. \n')
+  res.write('Updating Server... \n')
   runUpdate(function(error,stdout) {
   	if (error) {
   		handleError(res, error);
