@@ -10,13 +10,13 @@ var exec = require('child_process').exec;
 
 /* A simple secured web server, unauthenticated requests are not allowed */
 httpdigest.createServer(username, password, function(req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});		
+  res.write('Updating Server. \n')
   runUpdate(function(error,stdout) {
   	if (error) {
   		handleError(res, error);
   	}
   	else {
-  		res.writeHead(200, {'Content-Type': 'text/plain'});		
-  		res.write('Updating Server. \n')
   		res.write(stdout);
   		restartServer(res);
   	}
@@ -26,7 +26,6 @@ httpdigest.createServer(username, password, function(req, res) {
 
 var handleError = function(res, error) {
   console.log(error);
-  res.writeHead(200, {'Content-Type': 'text/plain'});	
   res.end('error');
 }
 
@@ -48,6 +47,7 @@ var restartServer = function(res) {
     	}
     	var pidCount = 0;
 		pids.forEach(function(pid) {
+			console.log('killing pid '+pid)
 			exec('kill '+pid,function(error,stdout,stderr){
 				if (error) {
 					handleError(res, error);
@@ -58,9 +58,11 @@ var restartServer = function(res) {
 			});
 		})
 		var checkAllKillDone = function() {
+			console.log('killed '+pidCount+' out of '+pids.length);
 			if (pidCount == pids.length) {
-				res.write('Server Processes Killed');
+				res.write('Server Processes Killed \n');
 				exec('cd '+serverPath+'gameserver/orangebox/; ./srcds_run -game tf -autoupdate -maxplayers 24 +map cp_badlands',function (error, stdout, stderr) {	  
+					console.log('restarting server');
 	  				if (error) {
 	  					handleError(res, error);
 	  					return;
