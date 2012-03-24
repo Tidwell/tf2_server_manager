@@ -1,23 +1,26 @@
 /*App for controlling tf2 server*/
 
 var serverPath = '~/hlds/';
+var username = 'test';
+var password = 'test';
 
-//accept request over http
-var http = require('http');
-http.createServer(function (req, res) {
-  
+var httpdigest = require('http-digest');
+
+/* A simple secured web server, unauthenticated requests are not allowed */
+httpdigest.createServer(username, password, function(request, response) {
   runUpdate(function(error,stdout) {
   	res.writeHead(200, {'Content-Type': 'text/plain'});	
+  	res.write('Updating Server. \n')
+    if (error) {
+    	res.end(error);
+    	return;
+    }
     res.end(stdout);
   })
-
 }).listen(8000);
-console.log('Server running at http://127.0.0.1:8000/');
 
 
-//blow out qs
 
-//if pw matches
 
 //run exec to update server, piping stdout to the http response
 var runUpdate = function(cb) {
@@ -27,8 +30,6 @@ var runUpdate = function(cb) {
 
 	// executes `pwd`
 	child = exec("cd "+serverPath+"; ./steam -command update -game tf -dir gameserver;", function (error, stdout, stderr) {
-	  sys.print('stdout: ' + stdout);
-	  sys.print('stderr: ' + stderr);
 	  cb(error,stdout)
 	});
 }
