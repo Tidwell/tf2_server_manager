@@ -11,7 +11,7 @@ http.createServer(function (req, res) {
     res.end(stdout);
   })
 
-}).listen(8000, '127.0.0.1');
+}).listen(8000);
 console.log('Server running at http://127.0.0.1:8000/');
 
 
