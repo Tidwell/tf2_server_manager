@@ -64,8 +64,10 @@ var restartServer = function(res) {
 			if (pidCount == pids.length) {
 				res.write('Server Processes Killed \n');
 				var cmd = 'cd '+serverPath+'gameserver/orangebox/; ./srcds_run -game tf -autoupdate -maxplayers 24 +map cp_badlands &;'
+				console.log('cmd',cmd)
+				exec(cmd,function (error, stdout, stderr) {	  
 				});
-			   	res.end('Server Restarting');
+				res.end('Server Restarting');
 			}
 		}
 	})
