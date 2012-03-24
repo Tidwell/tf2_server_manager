@@ -1,3 +1,4 @@
+var exec = require('child_process').exec;
 var serverPath = '~hlds/';
 var cmd = 'cd '+serverPath+'gameserver/orangebox/; ./srcds_run -game tf -autoupdate -maxplayers 24 +map cp_badlands;'
 console.log('cmd',cmd)
