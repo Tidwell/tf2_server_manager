@@ -7,7 +7,7 @@ var password = 'test';
 var httpdigest = require('http-digest');
 
 /* A simple secured web server, unauthenticated requests are not allowed */
-httpdigest.createServer(username, password, function(request, response) {
+httpdigest.createServer(username, password, function(req, res) {
   runUpdate(function(error,stdout) {
   	res.writeHead(200, {'Content-Type': 'text/plain'});	
   	res.write('Updating Server. \n')
